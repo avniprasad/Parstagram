@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/animation_list"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="185dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        app:srcCompat="@drawable/instagram_name" />
+
+    <EditText
+        android:id="@+id/tvUsername"
+        android:layout_width="324dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="207dp"
+        android:background="#18fffefe"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/tvPassword"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="242dp"
+        android:background="#18fffefe"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#15fffefe"
+        android:capitalize="none"
+        android:text="Don't have an account? Sign up."
+        android:textColor="#95fffefe"
+        android:textSize="14sp"
+        tools:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="326dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/button_border"
+        android:capitalize="none"
+        android:text="Log In"
+        android:textColor="#45fffefe"
+        android:textSize="14sp"
+        android:onClick="onLoginButton"
+        tools:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="326dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:capitalize="none"
+        android:text="Login with Facebook"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        tools:capitalize="none"
+        tools:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="326dp"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="149dp"
+        android:background="@android:color/transparent"
+        android:capitalize="none"
+        android:text="Forgot your login details? Get help signing in."
+        android:textColor="#90ffffff"
+        android:textSize="12sp"
+        tools:capitalize="none"
+        tools:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-149dp"
+        android:text="OR"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+</RelativeLayout>
