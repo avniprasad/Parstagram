@@ -33,10 +33,11 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="57dp"
+            android:paddingBottom="10dp"
             android:src="#fff" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/description_et"
             android:layout_width="329dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -45,7 +46,16 @@
             android:layout_marginStart="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:paddingTop="15dp"
+            android:text="Type your caption" />
+
+        <Button
+            android:id="@+id/post_btn"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/cam_btn"
+            android:layout_alignTop="@+id/cam_btn"
+            android:text="Post" />
     </RelativeLayout>
 
 </FrameLayout>

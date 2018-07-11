@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -22,6 +23,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            Intent i = new Intent(LoginActivity.this, NavigationActivity.class);
+            startActivity(i);
+            Toast.makeText(LoginActivity.this, "Automatically logged in!", Toast.LENGTH_LONG).show();
+        }
 
         usernameInput = findViewById(R.id.tvUsername);
         passwordInput = findViewById(R.id.tvPassword);

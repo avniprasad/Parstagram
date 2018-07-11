@@ -2,6 +2,7 @@ package codepathavniprasad.com.parstagram;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -13,13 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.io.File;
-import java.util.List;
 
 import codepathavniprasad.com.parstagram.model.Post;
 
@@ -29,9 +27,10 @@ public class CameraFragment extends Fragment {
     private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_175322.jpg";
     // TODO -- get image from user
     private EditText descriptionInput;
-    private Button createButton;
-    private Button refreshButton;
+    // private Button createButton;
+    // private Button refreshButton;
     private Button camButton;
+    private Button postButton;
     private ImageView postPic;
     public static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -39,6 +38,8 @@ public class CameraFragment extends Fragment {
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
+
+    public Bitmap imageBitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,10 +50,17 @@ public class CameraFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         descriptionInput = view.findViewById(R.id.description_et);
-        createButton = view.findViewById(R.id.create_btn);
-        refreshButton = view.findViewById(R.id.refresh_btn);
+        // createButton = view.findViewById(R.id.create_btn);
+        // refreshButton = view.findViewById(R.id.refresh_btn);
         camButton = view.findViewById(R.id.cam_btn);
+        postButton = view.findViewById(R.id.post_btn);
+        postPic = view.findViewById(R.id.ivPostPic);
 
+        postButton.setVisibility(View.INVISIBLE);
+        postPic.setVisibility(View.INVISIBLE);
+        descriptionInput.setVisibility(View.INVISIBLE);
+
+        /**
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +81,7 @@ public class CameraFragment extends Fragment {
                 loadTopPosts();
             }
         });
+         */
 
         camButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,16 +93,50 @@ public class CameraFragment extends Fragment {
             }
         });
 
-        postPic = view.findViewById(R.id.ivPostPic);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = descriptionInput.getText().toString();
+                ParseUser user = ParseUser.getCurrentUser();
 
+                // ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                // imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+                // String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), imageBitmap, "Title", null);
+                // Log.d("CameraFragment", "Path: " + path);
+                // return Uri.parse(path);
+
+
+                // ParseFile parseFile = null;
+                // createPost(message, parseFile, user);
+            }
+        });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == -1) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            postPic.setImageBitmap(imageBitmap);
+
+            Uri orgUri = data.getData();
+            Log.d("CameraFragment", "URI: " + orgUri);
+
+            postPic.setVisibility(View.VISIBLE);
+            descriptionInput.setVisibility(View.VISIBLE);
+            camButton.setVisibility(View.INVISIBLE);
+            postButton.setVisibility(View.VISIBLE);
+        }
+    }
 
     private void createPost(final String description, final ParseFile imageFile, final ParseUser user) {
 
         Log.d("HomeActivity","New Post is saved");
         Post newPost = Post.newInstance(user, imageFile, description);
     }
+
+    /**
 
     private void loadTopPosts() {
         final Post.Query postQuery = new Post.Query();
@@ -115,15 +158,7 @@ public class CameraFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == -1) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            postPic.setImageBitmap(imageBitmap);
-        }
-    }
+     */
 
     /**
     public File getPhotoFileUri(String fileName) {

@@ -68,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void createPost(final String description, final ParseFile imageFile, final ParseUser user) {
-
         Log.d("HomeActivity","New Post is saved");
         Post newPost = Post.newInstance(user, imageFile, description);
     }
