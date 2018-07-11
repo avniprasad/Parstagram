@@ -45,9 +45,9 @@
             android:layout_marginBottom="140dp"
             android:layout_marginStart="24dp"
             android:ems="10"
+            android:hint="Type your caption"
             android:inputType="textPersonName"
-            android:paddingTop="15dp"
-            android:text="Type your caption" />
+            android:paddingTop="15dp" />
 
         <Button
             android:id="@+id/post_btn"

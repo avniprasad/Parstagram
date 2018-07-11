@@ -57,10 +57,11 @@ public class Post extends ParseObject{
     }
 
     public static Post newInstance(ParseUser user, ParseFile file, String description) {
-        Post newPost = new Post();
+        final Post newPost = new Post();
         newPost.setDescription(description);
         newPost.setUser(user);
         newPost.setImage(file);
+
         newPost.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

@@ -5,7 +5,7 @@
         android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/instagram_home_filled_24"
-        android:title="" />
+        android:title=""/>
     <item
         android:id="@+id/navigation_dashboard"
         android:enabled="true"

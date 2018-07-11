@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
     private Button loginBtn;
+    private Button fbBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameInput = findViewById(R.id.tvUsername);
         passwordInput = findViewById(R.id.tvPassword);
         loginBtn = findViewById(R.id.bLogin);
+        fbBtn = findViewById(R.id.fb_btn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,34 @@ public class LoginActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
+        /**
+
+        fbBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ArrayList<String> permissions = new ArrayList();
+                permissions.add("email");
+                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions,
+                        new LogInCallback() {
+                            @Override
+                            public void done(ParseUser user, ParseException err) {
+                                if (err != null) {
+                                    Log.d("MyApp", "Uh oh. Error occurred" + err.toString());
+                                } else if (user == null) {
+                                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+                                } else if (user.isNew()) {
+                                    Log.d("MyApp", "User signed up and logged in through Facebook!");
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT)
+                                            .show();
+                                    Log.d("MyApp", "User logged in through Facebook!");
+                                }
+                            }
+                        });
+            }
+        });
+         */
     }
 
     private void login(String username, String password) {
@@ -63,12 +93,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-    public void onLoginButton(View v) {
-        /**
-        Intent i = new Intent(this, EnteredActivity.class);
-        startActivity(i);
-         */
+    /**
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
+    */
 
 }

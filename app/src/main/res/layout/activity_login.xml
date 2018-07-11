@@ -73,11 +73,10 @@
         android:text="Log In"
         android:textColor="#45fffefe"
         android:textSize="14sp"
-        android:onClick="onLoginButton"
         tools:textAllCaps="false" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/fb_btn"
         android:layout_width="326dp"
         android:layout_height="24dp"
         android:layout_below="@+id/textView3"
