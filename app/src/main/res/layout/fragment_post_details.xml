@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".PostDetailsFragment">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/ivPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            app:srcCompat="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/comment_btn"
+            android:layout_marginStart="20dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tvCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvUsername"
+            android:layout_below="@+id/tvUsername"
+            android:layout_marginRight="20dp"
+            android:paddingTop="10dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tvTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvUsername"
+            android:layout_below="@+id/tvCaption"
+            android:paddingTop="10dp"
+            android:textColor="#000" />
+
+        <ImageView
+            android:id="@+id/heart_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_above="@+id/tvUsername"
+            android:layout_alignStart="@+id/tvUsername"
+            app:srcCompat="@drawable/ufi_heart_icon" />
+
+        <ImageView
+            android:id="@+id/comment_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ivPostImage"
+            android:layout_marginStart="50dp"
+            app:srcCompat="@drawable/ufi_comment" />
+
+        <ImageView
+            android:id="@+id/share_btn"
+            android:layout_width="26dp"
+            android:layout_height="21dp"
+            android:layout_below="@+id/ivPostImage"
+            android:layout_marginStart="-3dp"
+            android:layout_toEndOf="@+id/tvUsername"
+            app:srcCompat="@drawable/ufi_new_direct" />
+
+    </RelativeLayout>
+</FrameLayout>

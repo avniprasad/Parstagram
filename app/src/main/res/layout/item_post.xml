@@ -68,9 +68,10 @@
 
     <ImageView
         android:id="@+id/share_btn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="26dp"
+        android:layout_height="21dp"
         android:layout_below="@+id/ivPostImage"
+        android:layout_marginStart="-3dp"
         android:layout_toEndOf="@+id/tvUsername"
         app:srcCompat="@drawable/ufi_new_direct" />
 

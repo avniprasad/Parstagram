@@ -1,5 +1,6 @@
 package codepathavniprasad.com.parstagram.model;
 
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.parse.ParseClassName;
@@ -74,5 +75,10 @@ public class Post extends ParseObject{
             }
         });
         return newPost;
+    }
+
+    public String getRelativeTimeAgo() {
+        long dateMillis = getCreatedAt().getTime();
+        return DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
     }
 }

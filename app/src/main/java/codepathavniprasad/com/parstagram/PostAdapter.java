@@ -3,6 +3,7 @@ package codepathavniprasad.com.parstagram;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvCaption.setText(post.getDescription());
         // String date = getRelativeTimeAgo(tweet.createAt);
-        holder.tvTimestamp.setText("[Time]");
+        holder.tvTimestamp.setText(post.getRelativeTimeAgo());
 
         /**
         holder.ibRetweet.setOnClickListener(new View.OnClickListener() {
@@ -129,21 +130,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         }
 
 
-        // when the user clicks on a row, show TweetDetailViewActivity for the selected tweet
+        // when the user clicks on a row, show PostDetailsFragments the selected tweet
         @Override
         public void onClick(View view) {
-            /**
             // gets item position
-            Log.d("TweetAdapter", String.format("Something was clicked"));
+            Log.d("PostAdapter", String.format("A post was clicked"));
             int position = getAdapterPosition();
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
-                // get the tweet at the position, this won't work if the class is static
-                Tweet tweet = mTweets.get(position);
-                Log.d("TweetAdapter", String.format("Got the tweet"));
-                mHandler.onItemClicked(tweet, context);
+                // get the post at the position, this won't work if the class is static
+                Post post = mPosts.get(position);
+                Log.d("PostAdapter", String.format("Got the tweet: " + post.getDescription()));
+                ((NavigationActivity) context).openDetails(post);
             }
-             */
         }
 
     }

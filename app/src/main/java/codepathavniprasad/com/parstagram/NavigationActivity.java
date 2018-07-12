@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import codepathavniprasad.com.parstagram.model.Post;
 
 public class NavigationActivity extends AppCompatActivity {
 
@@ -49,6 +52,17 @@ public class NavigationActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    protected void openDetails(Post post) {
+        Fragment details_fragment = new PostDetailsFragment();
+        // communicating from fragment to activity
+        Bundle args = new Bundle();
+        args.putString("PostId", post.getObjectId());
+        details_fragment.setArguments(args);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.my_fragment, details_fragment).commit();
     }
 
 }
