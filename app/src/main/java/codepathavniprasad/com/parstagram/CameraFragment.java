@@ -64,29 +64,6 @@ public class CameraFragment extends Fragment {
         postPic.setVisibility(View.INVISIBLE);
         descriptionInput.setVisibility(View.INVISIBLE);
 
-        /**
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String description = descriptionInput.getText().toString();
-                final ParseUser user = ParseUser.getCurrentUser();
-
-                final File file = new File(imagePath);
-                Log.d("HomeActivity", "File successfully created");
-                final ParseFile parseFile = new ParseFile(file);
-
-                createPost(description, parseFile, user);
-            }
-        });
-
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadTopPosts();
-            }
-        });
-         */
-
         camButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,16 +105,6 @@ public class CameraFragment extends Fragment {
                         }
                     }
                 });
-                // ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                // imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-
-                // String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), imageBitmap, "Title", null);
-                // Log.d("CameraFragment", "Path: " + path);
-                // return Uri.parse(path);
-
-
-                // ParseFile parseFile = null;
-                // createPost(message, parseFile, user);
             }
         });
     }
@@ -186,64 +153,4 @@ public class CameraFragment extends Fragment {
 
         return file;
     }
-
-    /**
-
-    private void loadTopPosts() {
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i += 1) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                        // checking if grabbing right info and post object unwraps the user
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-     */
-
-    /**
-    public File getPhotoFileUri(String fileName) {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        File mediaStorageDir = new File(getContext().getExternalCacheDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(APP_TAG, "failed to create directory");
-        }
-
-        // Return the file target for the photo based on filename
-        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-
-        return file;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            // if (resultCode == RESULT_OK) {
-            // by this point we have the camera photo on disk
-            Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-            // RESIZE BITMAP, see section below
-            // Load the taken image into a preview
-            ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-            ivPreview.setImageBitmap(takenImage);
-            /*
-            } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    */
 }

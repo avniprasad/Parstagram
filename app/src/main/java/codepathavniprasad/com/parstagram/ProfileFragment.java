@@ -1,22 +1,33 @@
 package codepathavniprasad.com.parstagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseFile;
 import com.parse.ParseUser;
+
+import java.io.File;
 
 
 public class ProfileFragment extends Fragment {
 
     private static final String KEY_USER_BIO = "bio";
+    private static final String KEY_USER_PICTURE = "profileImage";
 
     Button logoutButton;
     Button addBioBtn;
@@ -24,8 +35,19 @@ public class ProfileFragment extends Fragment {
     EditText addBioText;
     TextView currentText;
     TextView usernameText;
+    ImageView camBut;
+    ImageView profPic;
 
     ParseUser user;
+
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    public final String APP_TAG = "MyCustomApp";
+    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    public String photoFileName = "photo.jpg";
+    File photoFile;
+
+    public Bitmap imageBitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +67,8 @@ public class ProfileFragment extends Fragment {
         currentText = view.findViewById(R.id.bio_tv);
 
         usernameText = view.findViewById(R.id.username_tv);
+        camBut = view.findViewById(R.id.camera_iv);
+        profPic = view.findViewById(R.id.profile_iv);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +83,12 @@ public class ProfileFragment extends Fragment {
         user = ParseUser.getCurrentUser();
 
         usernameText.setText(user.getUsername());
+
+        if(user.get(KEY_USER_PICTURE) != null) {
+            ParseFile photoFile = user.getParseFile(KEY_USER_PICTURE);
+            GlideApp.with(getContext()).load(photoFile.getUrl()).circleCrop()
+                    .into(profPic);
+        }
 
         if (user.get(KEY_USER_BIO) == null) {
             editBioBtn.setVisibility(View.INVISIBLE);
@@ -95,5 +125,55 @@ public class ProfileFragment extends Fragment {
                 currentText.setVisibility(View.INVISIBLE);
             }
         });
+
+        camBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                // Create a File reference to access to future access
+
+                photoFile = getPhotoFileUri(photoFileName);
+
+                // wrap File object into a content provider
+                // required for API >= 24
+                // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
+                Uri fileProvider = FileProvider.getUriForFile(getActivity(), "codepathavniprasad.com.parstagram", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+                if (takePictureIntent.resolveActivity(ProfileFragment.this.getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+    }
+
+    // Returns the File for a photo stored on disk given the fileName
+    public File getPhotoFileUri(String fileName) {
+        // Get safe storage directory for photos
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        // This way, we don't need to request external read/write runtime permissions.
+        File mediaStorageDir = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            Log.d(APP_TAG, "failed to create directory");
+        }
+
+        // Return the file target for the photo based on filename
+        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+
+        return file;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == -1) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (BitmapFactory.decodeFile(photoFile.getAbsolutePath()));
+            ParseFile parseFile = new ParseFile(photoFile);
+            user.put(KEY_USER_PICTURE, parseFile);
+            user.saveInBackground();
+            profPic.setImageBitmap(imageBitmap);
+        }
     }
 }
