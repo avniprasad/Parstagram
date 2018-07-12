@@ -30,7 +30,6 @@ import codepathavniprasad.com.parstagram.model.Post;
 public class CameraFragment extends Fragment {
 
     private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_175322.jpg";
-    // TODO -- get image from user
     private EditText descriptionInput;
     // private Button createButton;
     // private Button refreshButton;

@@ -28,34 +28,53 @@
 
         <ImageView
             android:id="@+id/ivPostPic"
-            android:layout_width="269dp"
-            android:layout_height="296dp"
+            android:layout_width="72dp"
+            android:layout_height="88dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="57dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="59dp"
+            android:layout_toStartOf="@+id/cam_btn"
             android:paddingBottom="10dp"
             android:src="#fff" />
 
         <EditText
-            android:id="@+id/description_et"
-            android:layout_width="329dp"
+            android:id="@+id/location_et"
+            android:layout_width="338dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="140dp"
-            android:layout_marginStart="24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/ivPostPic"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="160dp"
             android:ems="10"
-            android:hint="Type your caption"
+            android:hint="Add Location"
             android:inputType="textPersonName"
-            android:paddingTop="15dp" />
+            android:paddingTop="15dp"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/description_et"
+            android:layout_width="257dp"
+            android:layout_height="86dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/ivPostPic"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:ems="10"
+            android:hint="Write a caption..."
+            android:inputType="textPersonName"
+            android:paddingTop="15dp"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/post_btn"
             android:layout_width="121dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/cam_btn"
-            android:layout_alignTop="@+id/cam_btn"
-            android:text="Post" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="38dp"
+            android:layout_marginTop="10dp"
+            android:text="Share" />
+
     </RelativeLayout>
 
 </FrameLayout>

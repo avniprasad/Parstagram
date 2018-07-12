@@ -16,7 +16,6 @@ public class NavigationActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private FragmentTransaction fragmentTransaction;
-    private Fragment currentFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

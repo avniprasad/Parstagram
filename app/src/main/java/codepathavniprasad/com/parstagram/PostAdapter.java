@@ -46,7 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvCaption.setText(post.getDescription());
         // String date = getRelativeTimeAgo(tweet.createAt);
-        holder.tvTimestamp.setText(post.getRelativeTimeAgo());
+        holder.tvTimestamp.setText(post.getRelativeTimeAgo().toUpperCase());
 
         /**
         holder.ibRetweet.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +107,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
         public ImageView ivPostImage;
         public TextView tvUsername;
+        public TextView tvTopUsername;
         public TextView tvCaption;
         public TextView tvTimestamp;
         public ImageView ibHeart;
@@ -120,6 +121,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             // perform findViewById lookups
             ivPostImage = (ImageView) itemView.findViewById(R.id.ivPostImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+            tvTopUsername = (TextView) itemView.findViewById(R.id.tvTopUsername);
             tvCaption = (TextView) itemView.findViewById(R.id.tvCaption);
             tvTimestamp = (TextView) itemView.findViewById(R.id.tvTimestamp);
             ibHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
