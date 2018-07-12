@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/userPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         app:srcCompat="@drawable/instagram_user_outline_24"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -18,8 +18,9 @@
     <TextView
         android:id="@+id/userComment"
         android:layout_width="290dp"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="3dp"
         android:layout_toEndOf="@+id/userPic"
         android:text="TextView"
         android:textColor="#000"

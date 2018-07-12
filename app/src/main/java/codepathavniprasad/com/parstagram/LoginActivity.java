@@ -12,13 +12,14 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput;
     private EditText passwordInput;
     private Button loginBtn;
-    private Button fbBtn;
+    private Button signupBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameInput = findViewById(R.id.tvUsername);
         passwordInput = findViewById(R.id.tvPassword);
         loginBtn = findViewById(R.id.bLogin);
-        fbBtn = findViewById(R.id.fb_btn);
+        signupBtn = findViewById(R.id.signup_btn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,34 +47,17 @@ public class LoginActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
-        /**
 
-        fbBtn.setOnClickListener(new View.OnClickListener() {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                final String username = usernameInput.getText().toString();
+                final String password = passwordInput.getText().toString();
 
-                ArrayList<String> permissions = new ArrayList();
-                permissions.add("email");
-                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions,
-                        new LogInCallback() {
-                            @Override
-                            public void done(ParseUser user, ParseException err) {
-                                if (err != null) {
-                                    Log.d("MyApp", "Uh oh. Error occurred" + err.toString());
-                                } else if (user == null) {
-                                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                                } else if (user.isNew()) {
-                                    Log.d("MyApp", "User signed up and logged in through Facebook!");
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT)
-                                            .show();
-                                    Log.d("MyApp", "User logged in through Facebook!");
-                                }
-                            }
-                        });
+                signUp(username, password);
             }
         });
-         */
+
     }
 
     private void login(String username, String password) {
@@ -93,12 +77,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+    private void signUp(String username, String password) {
+        // Create ParseUser
+        ParseUser user = new ParseUser();
+        // Set core properties
+        user.setUsername(username);
+        user.setPassword(password);
+        // Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                    Log.d("LoginActivity", "Sign up successful!");
+                    final Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                    Log.e("LoginActivity", "Sign up failure.");
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-    */
+
 
 }
