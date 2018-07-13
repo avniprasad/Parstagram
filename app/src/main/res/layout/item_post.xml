@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#fff">
 
     <ImageView
@@ -111,13 +111,18 @@
 
     <EditText
         android:id="@+id/comment_et"
-        android:layout_width="345dp"
-        android:layout_height="97dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvUsername"
         android:layout_below="@+id/tvTimestamp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="-4dp"
         android:ems="10"
         android:hint="Add your comment"
         android:inputType="textPersonName"
-        android:textColor="@color/black" />
+        android:paddingRight="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="13sp" />
 
 </RelativeLayout>

@@ -77,6 +77,10 @@ public class Post extends ParseObject{
                 }
             }
         });
+
+        user.add("posts", newPost);
+        user.saveInBackground();
+
         return newPost;
     }
 

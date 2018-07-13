@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +20,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import codepathavniprasad.com.parstagram.model.Post;
 
 
 public class ProfileFragment extends Fragment {
@@ -37,6 +45,12 @@ public class ProfileFragment extends Fragment {
     TextView usernameText;
     ImageView camBut;
     ImageView profPic;
+    TextView numPostText;
+
+    RecyclerView rvPosts;
+    PostAdapter postAdapter;
+    List<Post> posts;
+    int numPosts = 0;
 
     ParseUser user;
 
@@ -69,6 +83,8 @@ public class ProfileFragment extends Fragment {
         usernameText = view.findViewById(R.id.username_tv);
         camBut = view.findViewById(R.id.camera_iv);
         profPic = view.findViewById(R.id.profile_iv);
+        rvPosts = (RecyclerView) view.findViewById(R.id.rvPosts);
+        numPostText = view.findViewById(R.id.posts_tv);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +161,17 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+        posts = new ArrayList<Post>();
+        postAdapter = new PostAdapter(posts);
+        // RecyclerView setup (layout manager, use adapter)
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        // set the adapter
+        rvPosts.setAdapter(postAdapter);
+
+        loadPosts();
+
+        numPostText.setText("" + numPosts);
     }
 
     // Returns the File for a photo stored on disk given the fileName
@@ -175,5 +202,30 @@ public class ProfileFragment extends Fragment {
             user.saveInBackground();
             profPic.setImageBitmap(imageBitmap);
         }
+    }
+
+    private void loadPosts() {
+        final Post.Query postQuery = new Post.Query();
+        postQuery.getTop().withUser();
+
+        postQuery.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> objects, ParseException e) {
+                if (e == null) {
+                    for (int i = 0; i < objects.size(); i += 1) {
+                        Log.d("ProfileFragment", "Post[" + i + "] = "
+                                + objects.get(i).getDescription()
+                                + "\nusername = " + objects.get(i).getUser().getUsername());
+                        // checking if grabbing right info and post object unwraps the user
+                        if (objects.get(i).getUser().getUsername().equals(user.getUsername())) {
+                            posts.add(0, objects.get(i));
+                            postAdapter.notifyItemInserted(posts.size() - 1);
+                        }
+                    }
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
