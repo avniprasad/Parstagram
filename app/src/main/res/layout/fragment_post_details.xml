@@ -79,7 +79,7 @@
             android:layout_below="@+id/tvTopUsername"
             android:paddingTop="2dp"
             android:textColor="@android:color/darker_gray"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
         <ImageView
             android:id="@+id/heart_btn"
@@ -120,7 +120,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_comments"
             android:layout_width="342dp"
-            android:layout_height="wrap_content"
+            android:layout_height="162dp"
             android:layout_alignStart="@+id/tvUsername"
             android:layout_below="@+id/tvTimestamp"
             android:layout_marginTop="3dp" />

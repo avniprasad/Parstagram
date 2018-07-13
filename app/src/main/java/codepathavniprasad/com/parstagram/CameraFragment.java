@@ -31,6 +31,7 @@ public class CameraFragment extends Fragment {
 
     private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_175322.jpg";
     private EditText descriptionInput;
+    private EditText locationInput;
     // private Button createButton;
     // private Button refreshButton;
     private Button camButton;
@@ -54,8 +55,7 @@ public class CameraFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         descriptionInput = view.findViewById(R.id.description_et);
-        // createButton = view.findViewById(R.id.create_btn);
-        // refreshButton = view.findViewById(R.id.refresh_btn);
+        locationInput = view.findViewById(R.id.location_et);
         camButton = view.findViewById(R.id.cam_btn);
         postButton = view.findViewById(R.id.post_btn);
         postPic = view.findViewById(R.id.ivPostPic);
@@ -63,6 +63,9 @@ public class CameraFragment extends Fragment {
         postButton.setVisibility(View.INVISIBLE);
         postPic.setVisibility(View.INVISIBLE);
         descriptionInput.setVisibility(View.INVISIBLE);
+        locationInput.setVisibility(View.INVISIBLE);
+        camButton.setVisibility(View.VISIBLE);
+        Log.d("CameraFragment", "Cam Button on");
 
         camButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,23 +119,26 @@ public class CameraFragment extends Fragment {
             imageBitmap = (BitmapFactory.decodeFile(photoFile.getAbsolutePath()));
             postPic.setImageBitmap(imageBitmap);
 
-            // Uri orgUri = data.getData();
-            // Log.d("CameraFragment", "URI: " + orgUri);
-
             postPic.setVisibility(View.VISIBLE);
             descriptionInput.setVisibility(View.VISIBLE);
             camButton.setVisibility(View.INVISIBLE);
             postButton.setVisibility(View.VISIBLE);
+            locationInput.setVisibility(View.VISIBLE);
         }
     }
 
     private void createPost(final String description, final ParseFile imageFile, final ParseUser user) {
         Log.d("HomeActivity","New Post is saved");
         Post newPost = Post.newInstance(user, imageFile, description);
-
+        newPost.setLocation(locationInput.getText().toString());
         postButton.setVisibility(View.INVISIBLE);
         postPic.setVisibility(View.INVISIBLE);
         descriptionInput.setVisibility(View.INVISIBLE);
+        locationInput.setVisibility(View.INVISIBLE);
+        descriptionInput.setText("");
+        locationInput.setText("");
+        descriptionInput.setHint("Write a caption...");
+        locationInput.setHint("Add location");
         camButton.setVisibility(View.VISIBLE);
     }
 

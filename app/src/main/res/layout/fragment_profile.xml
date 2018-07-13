@@ -41,18 +41,21 @@
             android:id="@+id/posts_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/logout_btn"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/profile_iv"
-            android:layout_marginStart="131dp"
-            android:text="TextView"
-            android:textSize="17sp" />
+            android:layout_marginStart="138dp"
+            android:text="0"
+            android:textColor="@android:color/background_dark"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/posts_text"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="33dp"
-            android:layout_alignStart="@+id/posts_tv"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/posts_tv"
+            android:layout_marginStart="128dp"
             android:text="posts"
             android:textColor="@android:color/darker_gray"
             android:textSize="13sp" />

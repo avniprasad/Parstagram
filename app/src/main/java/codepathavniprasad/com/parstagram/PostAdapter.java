@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -52,6 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvTopUsername.setText(post.getUser().getUsername());
         holder.tvCaption.setText(post.getDescription());
+        holder.tvLocation.setText(post.getLocation());
         // String date = getRelativeTimeAgo(tweet.createAt);
         holder.tvTimestamp.setText(post.getRelativeTimeAgo().toUpperCase());
 
@@ -62,8 +64,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     .into(holder.ivUserImage);
         }
 
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
+
         GlideApp.with(context)
-                .load(post.getImage().getUrl())
+                .load(post.getImage().getUrl()).centerInside()
                 .into(holder.ivPostImage);
 
     }

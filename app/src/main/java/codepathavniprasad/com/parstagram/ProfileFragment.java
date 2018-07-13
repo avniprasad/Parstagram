@@ -170,8 +170,6 @@ public class ProfileFragment extends Fragment {
         rvPosts.setAdapter(postAdapter);
 
         loadPosts();
-
-        numPostText.setText("" + numPosts);
     }
 
     // Returns the File for a photo stored on disk given the fileName
@@ -222,6 +220,7 @@ public class ProfileFragment extends Fragment {
                             postAdapter.notifyItemInserted(posts.size() - 1);
                         }
                     }
+                    numPostText.setText("" + posts.size());
                 } else {
                     e.printStackTrace();
                 }
