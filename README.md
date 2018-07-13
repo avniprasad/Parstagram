@@ -36,7 +36,12 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] List anything else that you can get done to improve the app functionality!
+- [X] Clicking on profile loads all the photos that the current user posted
+   - [X] Shows the number of posts the current user has posted
+- [X] User can input location field for a post
+- [X] User can input and change the bio on their profile
+- [X] User can change profile image
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

@@ -5,16 +5,16 @@
         android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/instagram_home_filled_24"
-        android:title=""/>
+        android:title="Home"/>
     <item
         android:id="@+id/navigation_dashboard"
         android:enabled="true"
         android:icon="@drawable/instagram_new_post_filled_24"
-        android:title="" />
+        android:title="Camera" />
     <item
         android:id="@+id/navigation_notifications"
         android:enabled="true"
         android:icon="@drawable/instagram_user_filled_24"
-        android:title="" />
+        android:title="Profile" />
 
 </menu>
